@@ -1,0 +1,29 @@
+# NeoForge mod definition
+modLoader="javafml"
+loaderVersion="[51,)"
+license="GPL-3.0"
+
+[[mods]]
+modId="rift_anchoring"
+version="1.2.0"
+displayName="Rift Anchoring"
+logoFile="logo.png"
+
+description='''
+Rift Anchoring - A Chunk Loader Mod
+
+Features:
+1. 3x3 Obsidian base detection: Build a 3x3 obsidian platform and place a Respawn Anchor on top center.
+2. Chunk loading: Right-click with Infinite Glowstone to force-load the chunk indefinitely.
+3. Automatic energy consumption (configurable interval, default 1 hour per level).
+4. Infinite Glowstone crafting via Smithing Table (template + nether star) or Anvil (enchanted book).
+5. "Cloud Stone" easter egg: Rename Infinite Glowstone to "云石" for angel-themed effects.
+6. Spawn point disabled in multiblock structure.
+7. Persistent visual effects (particles, sounds).
+8. Destruction penalty on base break.
+9. Chunk Debug Wand for inspecting chunk loading status.
+10. Rift Lodestone for expanding chunk loading capacity.
+'''
+
+[[mixins]]
+config="rift_anchoring.mixins.json"
