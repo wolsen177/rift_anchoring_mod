@@ -1,0 +1,6 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "rift_anchoring:item/anchor_guide_compass"
+  }
+}

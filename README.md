@@ -56,7 +56,7 @@
 ## Installation
 
 1. Install **NeoForge 21.1.222+** for Minecraft 1.21.1
-2. Download the latest `.jar` from the [发布](https://github.com/yourusername/RiftAnchoring/releases) page
+2. Download the latest `.jar` from the [Releases](https://github.com/yourusername/RiftAnchoring/releases) page
 3. Place the JAR into your `.minecraft/mods/` folder
 4. Launch the game
 

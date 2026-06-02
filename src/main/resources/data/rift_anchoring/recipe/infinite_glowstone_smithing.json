@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:smithing_transform",
+  "template": {
+    "item": "minecraft:netherite_upgrade_smithing_template"
+  },
+  "base": {
+    "item": "minecraft:glowstone"
+  },
+  "addition": {
+    "item": "minecraft:nether_star"
+  },
+  "result": {
+    "id": "minecraft:glowstone",
+    "components": {
+      "rift_anchoring:infinite_glowstone": true
+    }
+  }
+}

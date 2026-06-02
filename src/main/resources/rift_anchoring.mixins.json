@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.xmtools.riftanchoring.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "RespawnAnchorBlockMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
