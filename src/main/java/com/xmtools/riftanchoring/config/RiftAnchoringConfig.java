@@ -12,6 +12,7 @@ public class RiftAnchoringConfig {
     public static final ModConfigSpec.BooleanValue ENABLE_DEBUG_WAND;
     public static final ModConfigSpec.IntValue MAX_LODESTONES_PER_ANCHOR;
     public static final ModConfigSpec.BooleanValue ENABLE_LODESTONE_DEBUG_LOG;
+    public static final ModConfigSpec.BooleanValue ENABLE_ECHO_SHARD_RECIPE;
 
     static {
         ModConfigSpec.Builder builder = new ModConfigSpec.Builder();
@@ -57,6 +58,10 @@ public class RiftAnchoringConfig {
         ENABLE_LODESTONE_DEBUG_LOG = builder
                 .comment("Enable detailed debug log output for rift lodestone operations. Default: false")
                 .define("enableLodestoneDebugLog", false);
+
+        ENABLE_ECHO_SHARD_RECIPE = builder
+                .comment("Enable crafting recipe for Echo Shards (4 Amethyst Shards + 1 Sculk = 1 Echo Shard). Default: true")
+                .define("enableEchoShardRecipe", true);
 
         builder.push("debug");
 

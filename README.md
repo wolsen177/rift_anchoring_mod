@@ -1,6 +1,7 @@
 # Rift Anchoring
 
 > 🌐 [中文文档](README_zh_cn.md) | English
+> **Version 1.2.1** | [Changelog](CHANGELOG.md)
 
 **Rift Anchoring** is a Minecraft NeoForge 1.21.1 mod that enables permanent chunk loading through two multiblock structures: the **Rift Respawn Anchor** (core loader) and the **Rift Lodestone** (expansion loader), complete with visual effects and full configuration support.
 
@@ -11,7 +12,7 @@
 ### Rift Respawn Anchor (Core Loader)
 
 - **3×3 Obsidian Base + Respawn Anchor** — Build a solid 3×3 obsidian platform with a Respawn Anchor on top of the center block
-- **Permanent Chunk Loading** — Right-click the anchor with Infinite Glowstone to permanently force-load the entire chunk
+- **Chunk Loading** — Right-click the anchor with **Glowstone** to activate chunk loading (consumes glowstone, drains energy over time). Use **Infinite Glowstone** for permanent loading (no energy drain)
 - **Infinite Glowstone Crafting** (configurable method):
   - **Anvil**: Glowstone + Enchanted Book (costs 5 XP levels)
   - **Smithing Table**: Glowstone + Nether Star + Netherite Upgrade Template
@@ -32,8 +33,11 @@
   2. In an **Anvil**, combine Infinite Glowstone + Enchanted Book → transforms the glowstone
   3. Hold the upgraded glowstone and **right-click** the Rift Respawn Anchor to activate it
   4. Craft a regular **Recovery Compass** (vanilla)
-  5. **Right-click** an active Rift Lodestone while holding the Recovery Compass → compass is consumed and a bound **Anchor Guide Compass** is created
+  5. **Right-click** an active Rift Lodestone while holding the Recovery Compass → Recovery Compass is converted into a bound **Anchor Guide Compass**
   6. The Anchor Guide Compass always points to its bound lodestone and shows coordinates/distance in its tooltip
+- **Bidirectional Conversion** (configurable):
+  - **Recovery Compass → Anchor Guide Compass**: Hold Recovery Compass and right-click an active Rift Lodestone
+  - **Anchor Guide Compass → Recovery Compass**: Hold Anchor Guide Compass and right-click the target active Rift Respawn Anchor → binds the lodestone and converts back to Recovery Compass (no item loss)
 - **Expansion Limits**: Each Rift Respawn Anchor supports up to **25** Rift Lodestones within a **5×5 chunk radius** (including its own chunk)
 - **Break Punishment** — Destroying a lodestone immediately releases its chunk; all Anchor Guide Compasses bound to it become unbound
 
@@ -66,10 +70,10 @@
 
 1. Build a **3×3 obsidian platform** on the ground
 2. Place a **Respawn Anchor** on top of the center block
-3. Craft **Infinite Glowstone** (see crafting section above)
-4. Hold Infinite Glowstone and **right-click** the anchor → activates chunk loading
-5. Particle effects appear above the anchor while it's active
-6. Breaking the obsidian base stops chunk loading and triggers drain punishment
+3. Hold **Glowstone** and **right-click** the anchor → activates chunk loading (consumes energy over time)
+   - For **permanent** chunk loading (no energy drain), craft **Infinite Glowstone** first (see crafting section)
+4. Particle effects appear above the anchor while it's active
+5. Breaking the obsidian base stops chunk loading and triggers drain punishment
 
 ### Rift Lodestone
 
@@ -77,7 +81,7 @@
 2. Find a **neighboring chunk** (touching the anchor's chunk by edge or corner)
 3. Build a 3×3 obsidian platform and place a **Lodestone** at the center → structure auto-activates
 4. Craft a **Recovery Compass** (vanilla item)
-5. Hold the Recovery Compass and **right-click** the active Rift Lodestone → compass is consumed, an **Anchor Guide Compass** is given
+5. Hold the Recovery Compass and **right-click** the active Rift Lodestone → Recovery Compass converts into an **Anchor Guide Compass**
 6. The Anchor Guide Compass always points to the lodestone and shows its coordinates
 
 ### Infinite Glowstone Crafting
@@ -87,6 +91,19 @@ Place **Glowstone** + **Enchanted Book** in an anvil.
 
 **Method 2 — Smithing Table** (no XP cost):
 Place **Glowstone** + **Nether Star** + **Netherite Upgrade Smithing Template** in a smithing table.
+
+### Echo Shard Crafting (Optional)
+
+- **Custom Recipe**: Amethyst Shard + Sculk block → Echo Shard (configurable, enabled by default)
+- **Recipe Pattern**:
+  ```
+  O A O
+  A S A
+  O A O
+  ```
+  - `O` = Air (empty slot)
+  - `A` = Amethyst Shard
+  - `S` = Sculk block
 
 ### Breaking a Rift Lodestone
 
@@ -115,6 +132,14 @@ maxLodestonesPerAnchor = 25
 
 # Enable detailed debug log output for rift lodestone operations (default: false)
 enableLodestoneDebugLog = false
+
+# Enable custom Echo Shard crafting recipe: Amethyst Shard + Sculk (default: true)
+enableEchoShardRecipe = true
+
+# Enable bidirectional compass conversion between Anchor Guide Compass and Recovery Compass (default: true)
+# - true: Recovery Compass can convert to Anchor Guide Compass, and Anchor Guide Compass can revert to Recovery Compass
+# - false: Only supports Recovery Compass → Anchor Guide Compass (one-way conversion)
+enableCompassBidirectionalConversion = true
 
 [debug]
 # Enable the Chunk Debug Wand item (default: true)

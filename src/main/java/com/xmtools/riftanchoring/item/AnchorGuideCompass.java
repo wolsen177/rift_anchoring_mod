@@ -3,15 +3,15 @@ package com.xmtools.riftanchoring.item;
 import com.xmtools.riftanchoring.ActiveAnchorTracker;
 import com.xmtools.riftanchoring.RiftAnchoring;
 import com.xmtools.riftanchoring.component.ModComponents;
-import com.xmtools.riftanchoring.util.ObsidianBaseDetector;
+import com.xmtools.riftanchoring.config.RiftAnchoringConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
@@ -70,6 +70,28 @@ public class AnchorGuideCompass extends Item {
 
         ActiveAnchorTracker.LodestoneData ld = ActiveAnchorTracker.getLodestoneData(level, lodestonePos);
         if (ld != null && ld.anchorPos() != null) {
+            if (RiftAnchoringConfig.ENABLE_COMPASS_BIDIRECTIONAL_CONVERSION.get()
+                    && ld.anchorPos().equals(targetPos)) {
+                ActiveAnchorTracker.unbindLodestone(level, lodestonePos);
+
+                ItemStack recoveryCompass = new ItemStack(Items.RECOVERY_COMPASS);
+                if (!player.getAbilities().instabuild) {
+                    stack.shrink(1);
+                }
+                if (!player.getInventory().add(recoveryCompass)) {
+                    player.drop(recoveryCompass, false);
+                }
+
+                player.displayClientMessage(
+                        Component.translatable("message.rift_anchoring.compass_reverted"), true);
+
+                if (level instanceof ServerLevel serverLevel) {
+                    level.playSound(null, targetPos, net.minecraft.sounds.SoundEvents.LODESTONE_COMPASS_LOCK,
+                            net.minecraft.sounds.SoundSource.BLOCKS, 0.6F, 0.5F);
+                }
+
+                return InteractionResult.SUCCESS;
+            }
             player.displayClientMessage(
                     Component.translatable("message.rift_anchoring.lodestone_already_bound"), true);
             return InteractionResult.PASS;
@@ -87,7 +109,17 @@ public class AnchorGuideCompass extends Item {
             }
 
             if (!player.getAbilities().instabuild) {
-                stack.shrink(1);
+                if (RiftAnchoringConfig.ENABLE_COMPASS_BIDIRECTIONAL_CONVERSION.get()) {
+                    ItemStack recoveryCompass = new ItemStack(Items.RECOVERY_COMPASS);
+                    stack.shrink(1);
+                    if (!player.getInventory().add(recoveryCompass)) {
+                        player.drop(recoveryCompass, false);
+                    }
+                    player.displayClientMessage(
+                            Component.translatable("message.rift_anchoring.compass_reverted"), true);
+                } else {
+                    stack.shrink(1);
+                }
             }
         } else {
             ChunkPos anchorChunk = new ChunkPos(targetPos);
@@ -121,6 +153,6 @@ public class AnchorGuideCompass extends Item {
                         parts[1], parts[2], parts[3]);
             }
         }
-        return Component.translatable("item.rift_anchoring.anchor_guide_compass");
+        return Component.translatable("item.rift_anchoring.anchor_guide_compass.unbound");
     }
 }

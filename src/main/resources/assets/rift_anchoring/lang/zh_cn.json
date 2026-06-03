@@ -52,6 +52,7 @@
   "message.rift_anchoring.compass_out_of_range": "§c裂隙磁石超出5×5区块范围",
   "message.rift_anchoring.compass_not_adjacent": "§c裂隙磁石区块必须与锚区块相邻",
   "message.rift_anchoring.compass_limit_reached": "§c该锚已达到最大裂隙磁石数量限制 (当前: %s)",
+  "message.rift_anchoring.compass_reverted": "§a锚定指引针已还原为追溯指针",
 
   "infinite_glowstone.tooltip": "§d无限萤石 - 放入裂隙重生锚可永久加载区块",
   "infinite_glowstone.item_name": "无限萤石",

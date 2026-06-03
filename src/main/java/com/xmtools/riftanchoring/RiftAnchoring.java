@@ -2,6 +2,7 @@ package com.xmtools.riftanchoring;
 
 import com.mojang.logging.LogUtils;
 import com.xmtools.riftanchoring.component.ModComponents;
+import com.xmtools.riftanchoring.config.ConfigCondition;
 import com.xmtools.riftanchoring.config.RiftAnchoringConfig;
 import com.xmtools.riftanchoring.item.ModItems;
 import com.xmtools.riftanchoring.network.AnchorActivePayload;
@@ -29,6 +30,7 @@ import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.AddReloadListenerEvent;
 import net.neoforged.neoforge.event.AnvilUpdateEvent;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
@@ -57,6 +59,7 @@ public class RiftAnchoring {
         ModItems.register(modEventBus);
 
         modEventBus.addListener(this::registerPayloads);
+        ConfigCondition.CONDITION_SERIALIZERS.register(modEventBus);
 
         NeoForge.EVENT_BUS.addListener(this::onServerTick);
         NeoForge.EVENT_BUS.addListener(this::onBlockBreak);
@@ -85,6 +88,8 @@ public class RiftAnchoring {
                 AnchorActivePayload::handleClient
         );
     }
+
+
 
     private void onServerTick(ServerTickEvent.Post event) {
         energyTickCounter++;

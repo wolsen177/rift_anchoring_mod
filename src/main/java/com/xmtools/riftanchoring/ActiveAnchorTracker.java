@@ -192,7 +192,7 @@ public class ActiveAnchorTracker {
                 continue;
             }
 
-            ActivationEffects.spawnLodestonePersistentEffects(level, pos);
+            ActivationEffects.spawnLodestonePersistentEffects(level, pos, data.anchorPos() == null);
         }
 
         for (BlockPos pos : toRemove) {

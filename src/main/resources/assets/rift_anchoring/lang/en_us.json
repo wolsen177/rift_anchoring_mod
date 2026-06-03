@@ -52,6 +52,7 @@
   "message.rift_anchoring.compass_out_of_range": "§cRift Lodestone is outside the 5x5 chunk range",
   "message.rift_anchoring.compass_not_adjacent": "§cRift Lodestone chunk must be adjacent to the anchor chunk",
   "message.rift_anchoring.compass_limit_reached": "§cAnchor has reached the maximum lodestone limit (current: %s)",
+  "message.rift_anchoring.compass_reverted": "§aAnchor Guide Compass reverted to Recovery Compass",
 
   "infinite_glowstone.tooltip": "§dInfinite Glowstone - Permanent chunk loading in Rift Respawn Anchor",
   "infinite_glowstone.item_name": "Infinite Glowstone",

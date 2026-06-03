@@ -582,7 +582,7 @@ public final class ActivationEffects {
         level.playSound(null, pos, SoundEvents.END_PORTAL_SPAWN, SoundSource.BLOCKS, 0.4F, 1.2F);
     }
 
-    public static void spawnLodestonePersistentEffects(ServerLevel level, BlockPos pos) {
+    public static void spawnLodestonePersistentEffects(ServerLevel level, BlockPos pos, boolean showBeam) {
         double cx = pos.getX() + 0.5;
         double cy = pos.getY() + 0.7;
         double cz = pos.getZ() + 0.5;
@@ -618,7 +618,9 @@ public final class ActivationEffects {
             level.sendParticles(ParticleTypes.ELECTRIC_SPARK, x, cy + 0.3, z, 1, 0, 0.03, 0, 0.02);
         }
 
-        spawnLodestoneBeam(level, pos);
+        if (showBeam) {
+            spawnLodestoneBeam(level, pos);
+        }
 
         if (gameTime % 10 == 0) {
             level.playSound(null, pos, SoundEvents.LODESTONE_COMPASS_LOCK, SoundSource.BLOCKS, 0.15F, 0.6F + RANDOM.nextFloat() * 0.2F);
